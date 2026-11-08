@@ -1,0 +1,7 @@
+CLAUDE.local.md
+.claude/settings.local.json
+.claude/
+docs/plans/
+spell/*.spl
+tags
+.repro/
