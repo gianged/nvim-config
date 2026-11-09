@@ -10,7 +10,7 @@ nvim   # lazy.nvim bootstraps, Mason installs servers
 ## Packages (Arch names)
 | Purpose | Packages |
 |---|---|
-| Core | `neovim` (>= 0.12), `git`, `curl`, `tar`, `unzip`, `ripgrep`, `fd` |
+| Core | `neovim` (>= 0.12), `git`, `curl`, `tar`, `unzip`, `rsync`, `ripgrep`, `fd` |
 | Treesitter | `tree-sitter-cli` (>= 0.26.1, not npm), `base-devel` (C compiler) |
 | Font | `ttf-firacode-nerd` (set it as terminal font) |
 | Clipboard | `wl-clipboard` (Wayland) or `xclip` (X11) |
