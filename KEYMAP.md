@@ -13,18 +13,75 @@ Leader: `<Space>`. Local leader: `\`.
 
 | Key | Action | Source |
 |---|---|---|
-| `Esc` | Clear search highlight | custom `config/keymaps.lua` |
-| `Alt+u` | Focus upper window | custom `config/keymaps.lua` |
-| `Alt+h` | Focus left window | custom `config/keymaps.lua` |
-| `Alt+j` | Focus lower window | custom `config/keymaps.lua` |
-| `Alt+k` | Focus right window | custom `config/keymaps.lua` |
+| `Ctrl+l` | Clear search highlight and redraw | nvim |
+| `Ctrl+w k` | Focus upper window | nvim |
+| `Ctrl+w h` | Focus left window | nvim |
+| `Ctrl+w j` | Focus lower window | nvim |
+| `Ctrl+w l` | Focus right window | nvim |
 
 ### Formatting
 
 | Key | Action | Source |
 |---|---|---|
 | `<leader>uf` | Toggle format on save (session) | custom `plugins/format.lua` |
-| `gq{motion}` | Format range: stylua for Lua, LSP elsewhere | nvim; `formatexpr` from `plugins/format.lua` |
+| `gq{motion}` | Format range: stylua for Lua, clang-format for C/C++, LSP elsewhere | nvim; `formatexpr` from `plugins/format.lua` |
+
+### Picker
+
+| Key | Action | Source |
+|---|---|---|
+| `<leader>ff` | Find files (hidden included, `.gitignore` respected) | custom `plugins/picker.lua` |
+| `<leader>fg` | Grep project (hidden included, `.gitignore` respected) | custom `plugins/picker.lua` |
+| `<leader>fb` | Open buffers | custom `plugins/picker.lua` |
+| `<leader>fr` | Resume last picker | custom `plugins/picker.lua` |
+
+### File tree
+
+| Key | Action | Source |
+|---|---|---|
+| `<leader>e` | Toggle tree, revealing the current file | custom `plugins/tree.lua` |
+
+## File tree buffer (nvim-tree default keys)
+
+| Key | Action | Source |
+|---|---|---|
+| `Enter` / `o` | Open | nvim-tree |
+| `Ctrl+v` / `Ctrl+x` | Open in vertical / horizontal split | nvim-tree |
+| `Tab` | Preview | nvim-tree |
+| `a` | Create file or folder (end with `/` for a folder) | nvim-tree |
+| `r` / `e` | Rename / rename basename | nvim-tree |
+| `d` / `D` | Delete / trash | nvim-tree |
+| `x` / `c` / `p` | Cut / copy / paste | nvim-tree |
+| `y` / `Y` / `gy` | Copy name / relative path / absolute path | nvim-tree |
+| `[c` / `]c` | Previous / next git change | nvim-tree |
+| `[e` / `]e` | Previous / next diagnostic | nvim-tree |
+| `H` / `I` | Toggle dotfiles / git-ignored filter | nvim-tree |
+| `f` / `F` | Live filter start / clear | nvim-tree |
+| `-` / `P` / `Backspace` | Root up / go to parent / close folder | nvim-tree |
+| `E` / `W` | Expand all / collapse all | nvim-tree |
+| `S` | Search | nvim-tree |
+| `R` | Refresh | nvim-tree |
+| `q` | Close tree | nvim-tree |
+| `g?` | Show all tree keys | nvim-tree |
+
+## Picker window (snacks.picker default keys, Insert and Normal)
+
+| Key | Action | Source |
+|---|---|---|
+| `Enter` | Open | snacks |
+| `Esc` | Close (Insert: to Normal first) | snacks |
+| `Ctrl+j` / `Ctrl+k`, `Ctrl+n` / `Ctrl+p`, `Up` / `Down` | Next / previous item | snacks |
+| `Ctrl+d` / `Ctrl+u` | Scroll list | snacks |
+| `Ctrl+f` / `Ctrl+b` | Scroll preview | snacks |
+| `Tab` / `Shift+Tab` | Select and move | snacks |
+| `Ctrl+a` | Select all | snacks |
+| `Ctrl+v` / `Ctrl+s` / `Ctrl+t` | Open in vertical split / split / tab | snacks |
+| `Ctrl+q` | Send to quickfix | snacks |
+| `Ctrl+g` | Toggle live grep | snacks |
+| `Alt+h` / `Alt+i` | Toggle hidden / ignored files | snacks |
+| `Alt+p` / `Alt+m` | Toggle preview / maximize | snacks |
+| `Ctrl+Up` / `Ctrl+Down` | Search history | snacks |
+| `Ctrl+x` | Delete buffer (buffers picker) | snacks |
 
 ### LSP (buffers with a language server)
 
