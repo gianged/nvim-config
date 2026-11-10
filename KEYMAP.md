@@ -41,6 +41,17 @@ Leader: `<Space>`. Local leader: `\`.
 |---|---|---|
 | `<leader>e` | Toggle tree, revealing the current file | custom `plugins/tree.lua` |
 
+### Claude Code
+
+| Key | Action | Source |
+|---|---|---|
+| `<leader>ac` | Toggle Claude split (starts `claude` if not running) | custom `plugins/claude.lua` |
+| `<leader>aC` | Start Claude with `--continue` | custom `plugins/claude.lua` |
+| `<leader>af` | Focus Claude (open if hidden) | custom `plugins/claude.lua` |
+| `<leader>as` | Send current line as `@file#Ln`; in nvim-tree, the file under cursor | custom `plugins/claude.lua` |
+| `<leader>aa` | Accept Claude diff (same as `:w` in the proposed buffer) | custom `plugins/claude.lua` |
+| `<leader>ad` | Reject Claude diff (same as `:q` in the proposed buffer) | custom `plugins/claude.lua` |
+
 ## File tree buffer (nvim-tree default keys)
 
 | Key | Action | Source |
@@ -110,6 +121,12 @@ Leader: `<Space>`. Local leader: `\`.
 | `<` | Indent left, keep selection | override `config/keymaps.lua` |
 | `>` | Indent right, keep selection | override `config/keymaps.lua` |
 
+### Claude Code
+
+| Key | Action | Source |
+|---|---|---|
+| `<leader>as` | Send selection as `@file#Lx-y` | custom `plugins/claude.lua` |
+
 ## Insert mode
 
 ### Completion (blink.cmp `default` preset, `plugins/completion.lua`)
@@ -128,3 +145,16 @@ Leader: `<Space>`. Local leader: `\`.
 | Key | Action | Source |
 |---|---|---|
 | `Ctrl+s` | Signature help; press again to cycle overloads | nvim |
+
+## Terminal mode
+
+| Key | Action | Source |
+|---|---|---|
+| `Ctrl+\ Ctrl+n` | Leave terminal mode (`Esc` goes to Claude: interrupt, `Esc Esc` rewind) | nvim; snacks `Esc Esc` off in `plugins/claude.lua` |
+| `Shift+Enter` | New line in Claude prompt | claudecode |
+
+## Command-line mode
+
+| Command | Action | Source |
+|---|---|---|
+| `:claude [args]` | Expands to `:ClaudeCode [args]` (only as the whole command) | custom `plugins/claude.lua` |
