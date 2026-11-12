@@ -18,14 +18,7 @@ local function on_attach(buf)
     map("n", "]c", nav_hunk("]c", "next"), "Next git hunk")
     map("n", "[c", nav_hunk("[c", "prev"), "Previous git hunk")
     map("n", "<leader>gp", gitsigns.preview_hunk, "Preview git hunk")
-    map("n", "<leader>gb", function()
-        gitsigns.blame_line({ full = true })
-    end, "Blame line")
-    map("n", "<leader>gB", gitsigns.toggle_current_line_blame, "Toggle line blame")
-    map("n", "<leader>gq", function()
-        gitsigns.setqflist("all")
-    end, "Git hunks to quickfix")
-    map({ "o", "x" }, "ih", gitsigns.select_hunk, "Git hunk")
+    map("n", "<leader>gb", gitsigns.toggle_current_line_blame, "Toggle inline blame")
 end
 
 return {
@@ -34,6 +27,7 @@ return {
         event = "BufReadPre",
         opts = {
             on_attach = on_attach,
+            current_line_blame_formatter = " (<author> - <author_time:%Y-%m-%d>) ",
         },
     },
     {
@@ -51,6 +45,7 @@ return {
         },
         keys = {
             { "<leader>gg", "<cmd>Neogit<cr>", desc = "Git panel" },
+            { "<M-g>", "<cmd>Neogit<cr>", desc = "Git panel" },
         },
     },
     {
@@ -77,7 +72,6 @@ return {
             },
         },
         keys = {
-            { "<leader>gd", "<cmd>CodeDiff<cr>", desc = "Git diff view" },
             { "<leader>gh", "<cmd>CodeDiff history %<cr>", desc = "Git file history" },
             { "<leader>gh", ":CodeDiff history<cr>", mode = "x", desc = "Git line history" },
         },

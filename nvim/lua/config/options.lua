@@ -30,6 +30,9 @@ vim.o.splitbelow = true
 vim.o.undofile = true
 vim.o.updatetime = 250
 
+-- Project config: .nvim.lua in cwd and parents, gated by :trust
+vim.o.exrc = true
+
 -- Clipboard: deferred until after startup
 vim.schedule(function()
     vim.o.clipboard = "unnamedplus"

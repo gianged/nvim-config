@@ -218,13 +218,11 @@ Keys inside the panels: [Git panel](#git-panel-neogit-default-keys), [Diff view]
 | Key | Action | Source |
 |---|---|---|
 | `<leader>gg` | Git panel (Neogit, own tab): stage, commit, push | custom `plugins/git.lua` |
-| `<leader>gd` | Diff view (codediff): changed files + side-by-side diff | custom `plugins/git.lua` |
+| `Alt+g` | Git panel (same as `<leader>gg`) | custom `plugins/git.lua` |
 | `<leader>gh` | History of current file (codediff) | custom `plugins/git.lua` |
 | `]c` / `[c` | Next / previous git hunk; built-in diff jump in diff mode (file buffers) | custom `plugins/git.lua` (gitsigns) |
 | `<leader>gp` | Preview hunk under cursor (file buffers) | custom `plugins/git.lua` (gitsigns) |
-| `<leader>gb` | Blame line, full commit message (file buffers) | custom `plugins/git.lua` (gitsigns) |
-| `<leader>gB` | Toggle end-of-line blame (file buffers) | custom `plugins/git.lua` (gitsigns) |
-| `<leader>gq` | All hunks in repo → quickfix list (file buffers) | custom `plugins/git.lua` (gitsigns) |
+| `<leader>gb` | Toggle inline blame on cursor line: `(author - date)`, all buffers, resets on restart (file buffers) | custom `plugins/git.lua` (gitsigns) |
 
 ### Claude Code
 
@@ -236,6 +234,40 @@ Keys inside the panels: [Git panel](#git-panel-neogit-default-keys), [Diff view]
 | `<leader>as` | Send current line as `@file#Ln`; in nvim-tree, the file under cursor | custom `plugins/claude.lua` |
 | `<leader>aa` | Accept Claude diff (same as `:w` in the proposed buffer) | custom `plugins/claude.lua` |
 | `<leader>ad` | Reject Claude diff (same as `:q` in the proposed buffer) | custom `plugins/claude.lua` |
+
+### Run tasks
+
+Keys inside the list: [Task list](#task-list-overseer-default-keys). Per-project tasks: `.nvim.lua` at the repo root (`:trust` once).
+
+| Key | Action | Source |
+|---|---|---|
+| `<leader>rr` | Run task: entry points (`run <bin>`, `run all`), `.nvim.lua`, task files (cargo, just, make, npm, tasks.json, ...) | custom `plugins/tasks.lua` |
+| `<leader>rs` | Run a shell command as a task | custom `plugins/tasks.lua` |
+| `<leader>rt` | Toggle task list + output pane (bottom) | custom `plugins/tasks.lua` |
+| `<leader>rl` | Restart last started task (a whole group for `run all` / groups) | custom `plugins/tasks.lua` |
+| `<leader>ra` | Pick a task, then an action on it | custom `plugins/tasks.lua` |
+
+### Debug (Rust, C, C++)
+
+Keys inside the debug panel: [Debug view](#debug-view-nvim-dap-view-default-keys). Targets: `debug <bin>` / `debug all (N)` detected for Rust; `.nvim.lua` `debug` entries (`.vscode/launch.json` is not read).
+
+| Key | Action | Source |
+|---|---|---|
+| `<leader>dd` | Pick debug target or compound, start a new session | custom `plugins/debug.lua` |
+| `<leader>dc` / `F5` | Continue; no session: same as `<leader>dd` | custom `plugins/debug.lua` |
+| `<leader>db` / `F9` | Toggle breakpoint | custom `plugins/debug.lua` |
+| `<leader>dB` | Conditional breakpoint (prompt) | custom `plugins/debug.lua` |
+| `<leader>dL` | Log point (prompt) | custom `plugins/debug.lua` |
+| `<leader>dn` / `F10` | Step over | custom `plugins/debug.lua` |
+| `<leader>di` / `F11` | Step into | custom `plugins/debug.lua` |
+| `<leader>do` / `Shift+F11` | Step out | custom `plugins/debug.lua` |
+| `<leader>dC` | Run to cursor | custom `plugins/debug.lua` |
+| `<leader>dl` | Run last config | custom `plugins/debug.lua` |
+| `<leader>dr` | Restart session: terminate, rebuild, rerun | custom `plugins/debug.lua` |
+| `<leader>dq` / `<leader>dQ` | Terminate focused session / all sessions | custom `plugins/debug.lua` |
+| `<leader>dv` | Toggle debug view | custom `plugins/debug.lua` |
+| `<leader>dw` | Watch expression under cursor (Visual: selection) | custom `plugins/debug.lua` |
+| `<leader>dk` | Hover value under cursor (Visual: selection) | custom `plugins/debug.lua` |
 
 ## Visual mode
 
@@ -274,15 +306,6 @@ Keys inside the panels: [Git panel](#git-panel-neogit-default-keys), [Diff view]
 | Key | Action | Source |
 |---|---|---|
 | `<leader>gh` | History of selected lines (codediff) | custom `plugins/git.lua` |
-| `ih` | Select git hunk (file buffers) | custom `plugins/git.lua` (gitsigns) |
-
-## Operator-pending mode
-
-After an operator (`d`, `y`, `c`, `gu`, ...), before its motion.
-
-| Key | Action | Source |
-|---|---|---|
-| `ih` | Git hunk text object, e.g. `yih`, `dih` (file buffers) | custom `plugins/git.lua` (gitsigns) |
 
 ## Insert mode
 
@@ -404,6 +427,36 @@ Keys that only work inside a panel's own window.
 | `]x` / `[x` | Merge view: next / previous conflict | codediff |
 
 Hunk staging keys are off in the diff view; stage hunks in the Git panel.
+
+### Task list (overseer default keys)
+
+| Key | Action | Source |
+|---|---|---|
+| `Enter` | Action menu: restart, stop, watch (rerun on save), open, dispose, quickfix | overseer |
+| `o` | Open task output in the main window | overseer |
+| `Ctrl+v` / `Ctrl+s` / `Ctrl+t` / `Ctrl+f` | Open output in vsplit / split / tab / float | overseer |
+| `p` | Toggle output preview | overseer |
+| `Ctrl+j` / `Ctrl+k` | Scroll output pane (shadows window focus inside the list) | overseer |
+| `{` / `}` | Previous / next task | overseer |
+| `dd` | Dispose task | overseer |
+| `Ctrl+e` | Edit task (command, env) | overseer |
+| `Ctrl+q` | Task output → quickfix list | overseer |
+| `g.` | Toggle wrapped tasks | overseer |
+| `?` / `g?` | Show all keys | overseer |
+| `q` | Close list (tasks keep running) | overseer |
+
+### Debug view (nvim-dap-view default keys)
+
+| Key | Action | Source |
+|---|---|---|
+| `W` / `S` / `E` / `B` / `T` / `R` / `K` | Watches / Scopes / Exceptions / Breakpoints / Threads / REPL / Sessions | dap-view |
+| `]v` / `[v` | Next / previous view | dap-view |
+| `]s` / `[s` | Console: next / previous session | dap-view |
+| `Enter` | Expand variable, jump to frame or breakpoint, switch session | dap-view |
+| `s` | Set variable value (Scopes, Watches) | dap-view |
+| `a` / `i` / `e` / `d` | Watches: append / insert / edit / delete expression | dap-view |
+| `d` | Breakpoints: delete | dap-view |
+| `g?` | Show all keys of the view | dap-view |
 
 ### Picker window (snacks.picker default keys, Insert and Normal)
 

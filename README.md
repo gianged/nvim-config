@@ -14,7 +14,7 @@ nvim   # lazy.nvim bootstraps, Mason installs servers
 | Treesitter | `tree-sitter-cli` (>= 0.26.1, not npm), `base-devel` (C compiler) |
 | Font | `ttf-firacode-nerd` (set it as terminal font) |
 | Clipboard | `wl-clipboard` (Wayland) or `xclip` (X11) |
-| Rust | `rustup` -> `rustup component add rust-analyzer` |
+| Rust | `rustup` -> `rustup component add rust-analyzer rust-src` (rust-src: step into std while debugging) |
 | C / C++ | `clang` (clangd) |
 | Go | `go` |
 | Java | `jdk-openjdk` (jdtls via Mason) |
@@ -23,6 +23,7 @@ nvim   # lazy.nvim bootstraps, Mason installs servers
 | Lua lint | `stylua` |
 | Claude Code | `claude` CLI on `PATH` |
 | Git / Docker UI | `lazygit`, `lazydocker` |
+| Task runners (optional) | `just`, `go-task`; `cargo install cargo-make` |
 
 Mason needs the language runtimes above to build servers.
 After install: `:checkhealth`, `:Mason`, `:TSUpdate`.
