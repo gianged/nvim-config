@@ -20,6 +20,13 @@ return {
             desc = "Find files",
         },
         {
+            "<M-f>",
+            function()
+                require("snacks").picker.files()
+            end,
+            desc = "Find files",
+        },
+        {
             "<leader>fg",
             function()
                 require("snacks").picker.grep()

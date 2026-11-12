@@ -66,10 +66,26 @@ return {
         filters = { custom = { "^\\.git$" } },
         diagnostics = { enable = true, show_on_dirs = true },
         update_focused_file = { enable = true },
+        actions = {
+            open_file = {
+                window_picker = {
+                    picker = function()
+                        return require("config.peek").tree_target()
+                    end,
+                },
+            },
+        },
     },
     keys = {
         {
             "<leader>e",
+            function()
+                require("nvim-tree.api").tree.toggle({ find_file = true })
+            end,
+            desc = "Toggle file tree",
+        },
+        {
+            "<M-e>",
             function()
                 require("nvim-tree.api").tree.toggle({ find_file = true })
             end,

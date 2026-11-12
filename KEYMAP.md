@@ -13,11 +13,105 @@ Leader: `<Space>`. Local leader: `\`.
 
 | Key | Action | Source |
 |---|---|---|
-| `Ctrl+l` | Clear search highlight and redraw | nvim |
-| `Ctrl+w k` | Focus upper window | nvim |
-| `Ctrl+w h` | Focus left window | nvim |
-| `Ctrl+w j` | Focus lower window | nvim |
-| `Ctrl+w l` | Focus right window | nvim |
+| `Esc` | Clear search highlight | custom `config/keymaps.lua` |
+| `Ctrl+h` | Focus left window | override `config/keymaps.lua` (built-in: same as `h`) |
+| `Ctrl+j` | Focus lower window | override `config/keymaps.lua` (built-in: same as `j`) |
+| `Ctrl+k` | Focus upper window | custom `config/keymaps.lua` |
+| `Ctrl+l` | Focus right window | override `config/keymaps.lua` (built-in: redraw, clear search highlight) |
+
+### Files and buffers
+
+Find a file: `<leader>ff`. Create from the tree: `a`. Everything else below is built-in.
+
+| Key | Action | Source |
+|---|---|---|
+| `:w` / `:wa` | Save / save all | nvim |
+| `:q` / `:qa` / `:q!` | Close window / quit all / quit discarding changes | nvim |
+| `:e path` | Open file; a new path is created on `:w` | nvim |
+| `:w ++p` | Save, creating missing parent directories | nvim |
+| `:e!` | Reload file from disk, discarding changes | nvim |
+| `Ctrl+^` | Toggle to previous (alternate) buffer | nvim |
+| `]b` / `[b` | Next / previous buffer | nvim |
+| `:bd` | Close buffer | nvim |
+| `gf` | Open file path under cursor | nvim |
+| `gx` | Open path or URL under cursor with system handler | nvim |
+
+### Move and jump
+
+| Key | Action | Source |
+|---|---|---|
+| `:{N}` / `{N}G` | Go to line N | nvim |
+| `gg` / `G` | First / last line | nvim |
+| `0` / `^` / `$` | Line start / first non-blank / line end | nvim |
+| `w` / `b` / `e` | Next word / previous word / end of word (`W` `B` `E`: whitespace-separated) | nvim |
+| `f{c}` / `t{c}` | Jump to / before char `c` in line; `;` / `,` repeat forward / back | nvim |
+| `%` | Matching bracket (and `if`/`end` pairs via matchit) | nvim |
+| `{` / `}` | Previous / next blank-line block | nvim |
+| `Ctrl+d` / `Ctrl+u` | Half page down / up | nvim |
+| `zz` / `zt` / `zb` | Scroll cursor line to center / top / bottom | nvim |
+| `Ctrl+o` / `Ctrl+i` | Jump back / forward (e.g. return after `gd`) | nvim |
+| `g;` / `g,` | Older / newer change position | nvim |
+| `m{a-z}` / `'{a-z}` | Set mark / jump to mark (`A-Z`: across files) | nvim |
+
+### Search and replace
+
+`ignorecase` + `smartcase`: case-insensitive unless the pattern has an uppercase letter.
+
+| Key | Action | Source |
+|---|---|---|
+| `/text` / `?text` | Search forward / backward; `n` / `N` next / previous match | nvim |
+| `*` / `#` | Search word under cursor forward / backward | nvim |
+| `:%s/old/new/g` | Replace in file; add `c` flag to confirm each | nvim |
+| `:s/old/new/g` | Replace in Visual selection (press `:` with selection active) | nvim |
+| `:cdo s/old/new/g \| update` | Replace across project: `<leader>fg`, `Ctrl+q` to quickfix, then this | nvim |
+
+### Edit
+
+Yank, delete, and put use the system clipboard (`clipboard=unnamedplus`).
+
+| Key | Action | Source |
+|---|---|---|
+| `i` / `a` / `I` / `A` | Insert before cursor / after cursor / line start / line end | nvim |
+| `o` / `O` | New line below / above | nvim |
+| `u` / `Ctrl+r` | Undo / redo (undo persists across sessions) | nvim |
+| `.` | Repeat last change | nvim |
+| `dd` / `yy` / `cc` | Delete / yank / change line | nvim |
+| `p` / `P` | Put after / before cursor | nvim |
+| `"0p` | Put last yank (not overwritten by deletes) | nvim |
+| `{op}i{obj}` / `{op}a{obj}` | Text object inside / around, e.g. `ciw`, `di"`, `ya(`, `dap` | nvim |
+| `x` / `r{c}` / `~` | Delete char / replace char / toggle case | nvim |
+| `>>` / `<<` | Indent / unindent line | nvim |
+| `J` | Join line below | nvim |
+| `gcc` / `gc{motion}` | Toggle comment line / motion | nvim |
+| `Ctrl+a` / `Ctrl+x` | Increment / decrement number | nvim |
+| `q{a-z}` ... `q` | Record macro into register | nvim |
+| `@{a-z}` / `@@` | Play macro / replay last | nvim |
+
+### Windows and tabs
+
+| Key | Action | Source |
+|---|---|---|
+| `Ctrl+w v` / `Ctrl+w s` | Split vertical / horizontal (`:vs path` / `:sp path` with a file) | nvim |
+| `Ctrl+w q` / `Ctrl+w o` | Close window / close all others | nvim |
+| `Ctrl+w =` | Equalize window sizes | nvim |
+| `Ctrl+w <` / `>` / `+` / `-` | Narrower / wider / taller / shorter | nvim |
+| `gt` / `gT` | Next / previous tab (Neogit, codediff open in tabs) | nvim |
+| `:tabclose` | Close tab | nvim |
+
+### Quickfix list
+
+| Key | Action | Source |
+|---|---|---|
+| `]q` / `[q` | Next / previous entry | nvim |
+| `[Q` / `]Q` | First / last entry | nvim |
+| `:copen` / `:cclose` | Open / close quickfix window | nvim |
+
+### Help
+
+| Key | Action | Source |
+|---|---|---|
+| `:h {topic}` | Help, e.g. `:h gq`, `:h i_CTRL-R` | nvim |
+| `:h index` | Every built-in key, by mode | nvim |
 
 ### Formatting
 
@@ -31,6 +125,7 @@ Leader: `<Space>`. Local leader: `\`.
 | Key | Action | Source |
 |---|---|---|
 | `<leader>ff` | Find files (hidden included, `.gitignore` respected) | custom `plugins/picker.lua` |
+| `Alt+f` | Find files (same as `<leader>ff`) | custom `plugins/picker.lua` |
 | `<leader>fg` | Grep project (hidden included, `.gitignore` respected) | custom `plugins/picker.lua` |
 | `<leader>fb` | Open buffers | custom `plugins/picker.lua` |
 | `<leader>fr` | Resume last picker | custom `plugins/picker.lua` |
@@ -40,6 +135,7 @@ Leader: `<Space>`. Local leader: `\`.
 | Key | Action | Source |
 |---|---|---|
 | `<leader>e` | Toggle tree, revealing the current file | custom `plugins/tree.lua` |
+| `Alt+e` | Toggle tree (same as `<leader>e`) | custom `plugins/tree.lua` |
 
 ### Claude Code
 
@@ -52,11 +148,24 @@ Leader: `<Space>`. Local leader: `\`.
 | `<leader>aa` | Accept Claude diff (same as `:w` in the proposed buffer) | custom `plugins/claude.lua` |
 | `<leader>ad` | Reject Claude diff (same as `:q` in the proposed buffer) | custom `plugins/claude.lua` |
 
+### Git
+
+| Key | Action | Source |
+|---|---|---|
+| `<leader>gg` | Git panel (Neogit, own tab): stage, commit, push | custom `plugins/git.lua` |
+| `<leader>gd` | Diff view (codediff): changed files + side-by-side diff | custom `plugins/git.lua` |
+| `<leader>gh` | History of current file (codediff) | custom `plugins/git.lua` |
+| `]c` / `[c` | Next / previous git hunk; built-in diff jump in diff mode (file buffers) | custom `plugins/git.lua` (gitsigns) |
+| `<leader>gp` | Preview hunk under cursor (file buffers) | custom `plugins/git.lua` (gitsigns) |
+| `<leader>gb` | Blame line, full commit message (file buffers) | custom `plugins/git.lua` (gitsigns) |
+| `<leader>gB` | Toggle end-of-line blame (file buffers) | custom `plugins/git.lua` (gitsigns) |
+| `<leader>gq` | All hunks in repo → quickfix list (file buffers) | custom `plugins/git.lua` (gitsigns) |
+
 ## File tree buffer (nvim-tree default keys)
 
 | Key | Action | Source |
 |---|---|---|
-| `Enter` / `o` | Open | nvim-tree |
+| `Enter` / `o` | Open in the window you came from; never the peek window (goes to its origin) | nvim-tree; target from `plugins/tree.lua` |
 | `Ctrl+v` / `Ctrl+x` | Open in vertical / horizontal split | nvim-tree |
 | `Tab` | Preview | nvim-tree |
 | `a` | Create file or folder (end with `/` for a folder) | nvim-tree |
@@ -74,6 +183,46 @@ Leader: `<Space>`. Local leader: `\`.
 | `R` | Refresh | nvim-tree |
 | `q` | Close tree | nvim-tree |
 | `g?` | Show all tree keys | nvim-tree |
+
+## Git panel (Neogit default keys)
+
+| Key | Action | Source |
+|---|---|---|
+| `Tab` | Expand / fold a file's inline diff | neogit |
+| `s` / `u` / `x` | Stage / unstage / discard: file, hunk (on `@@`), or Visual lines | neogit |
+| `S` / `Ctrl+s` | Stage all modified / stage all incl. untracked | neogit |
+| `Enter` | Open file | neogit |
+| `c` | Commit menu (`c` commit, `a` amend, `w` reword) | neogit |
+| `Ctrl+c Ctrl+c` / `Ctrl+c Ctrl+k` | Commit message buffer: submit / abort | neogit |
+| `P` | Push menu (`p` push remote, `u` upstream) | neogit |
+| `p` | Pull menu | neogit |
+| `b` / `l` / `Z` | Branch / log / stash menu | neogit |
+| `d` | Diff menu → codediff | neogit |
+| `?` | Show all keys | neogit |
+| `q` | Close | neogit |
+
+## Diff view (codediff default keys)
+
+| Key | Action | Source |
+|---|---|---|
+| `]c` / `[c` | Next / previous hunk | codediff |
+| `]f` / `[f` | Next / previous file | codediff |
+| `-` | Stage / unstage file | codediff |
+| `do` / `dp` | Get / put change from other side | codediff |
+| `t` / `gc` | Toggle inline layout / compact (fold unchanged) | codediff |
+| `gS` | Swap staged / unstaged view of file | codediff |
+| `gf` | Open file in previous tab | codediff |
+| `<leader>e` / `<leader>b` | Focus / toggle file list (diff tab only) | codediff |
+| `Enter` / `R` | File list: open / refresh | codediff |
+| `S` / `U` / `X` | File list: stage all / unstage all / restore file | codediff |
+| `i` | File list: toggle list / tree view | codediff |
+| `g?` | Show all keys | codediff |
+| `q` | Close diff tab | codediff |
+| `<leader>gct` / `gco` / `gcb` / `gcx` | Merge view: accept incoming / current / both, or discard (this conflict) | custom `plugins/git.lua` |
+| `<leader>gcT` / `gcO` / `gcB` / `gcX` | Merge view: same, whole file | custom `plugins/git.lua` |
+| `]x` / `[x` | Merge view: next / previous conflict | codediff |
+
+Hunk staging keys are off in the diff view; stage hunks in the Git panel.
 
 ## Picker window (snacks.picker default keys, Insert and Normal)
 
@@ -98,19 +247,28 @@ Leader: `<Space>`. Local leader: `\`.
 
 | Key | Action | Source |
 |---|---|---|
-| `gd` | Go to definition | override `plugins/lsp.lua` (built-in: local declaration search) |
-| `grr` | References, without import lines or the declaration | override `plugins/lsp.lua` |
+| `gd` | Go to definition in the peek window (right vsplit, one per tab, reused); several results → quickfix list | override `plugins/lsp.lua` (built-in: local declaration search) |
+| `grr` | References, without import lines or the declaration → quickfix list (`Enter` opens in peek) | override `plugins/lsp.lua` |
 | `grn` | Rename symbol | nvim |
 | `gra` | Code action (also Visual mode) | nvim |
-| `gri` | Go to implementation | nvim |
-| `grt` | Go to type definition | nvim |
+| `gri` | Go to implementation in the peek window; several results → quickfix list | override `plugins/lsp.lua` |
+| `grt` | Go to type definition in the peek window; several results → quickfix list | override `plugins/lsp.lua` |
 | `grx` | Run code lens | nvim |
 | `gO` | Document symbols | nvim |
 | `K` | Hover docs | nvim |
-| `Ctrl+]` | Go to definition (via tagfunc) | nvim |
+| `Ctrl+]` | Go to definition in the peek window (same as `gd`) | override `plugins/lsp.lua` (built-in: tag jump via tagfunc) |
 | `[d` / `]d` | Previous / next diagnostic | nvim |
 | `<leader>uh` | Toggle inlay hints in current buffer (on by default) | custom `plugins/lsp.lua` |
 | `<leader>q` | All diagnostics → quickfix list | custom `plugins/lsp.lua` |
+| `<leader>wp` | Pin peek: move its file and view into the window `gd` came from, close peek | custom `plugins/lsp.lua` |
+| `Ctrl+p` | Pin peek (same as `<leader>wp`) | override `plugins/lsp.lua` (built-in: same as `k`) |
+| `Alt+]` | Previous peek location (peek history, any window); no-op when empty | custom `plugins/lsp.lua` |
+
+## Quickfix window
+
+| Key | Action | Source |
+|---|---|---|
+| `Enter` | Open entry; in the peek window for LSP lists (`gd`, `gri`, `grt`, `grr`), default elsewhere | override `after/ftplugin/qf.lua` |
 
 ## Visual mode
 
@@ -121,13 +279,46 @@ Leader: `<Space>`. Local leader: `\`.
 | `<` | Indent left, keep selection | override `config/keymaps.lua` |
 | `>` | Indent right, keep selection | override `config/keymaps.lua` |
 
+### Selection
+
+| Key | Action | Source |
+|---|---|---|
+| `v` / `V` / `Ctrl+v` | Start charwise / linewise / block Visual (from Normal) | nvim |
+| `gv` | Reselect last selection (from Normal) | nvim |
+| `o` | Jump to other end of selection | nvim |
+| `Ctrl+v` ... `I` / `A` | Block: insert / append on every line, applied on `Esc` | nvim |
+| `y` / `d` / `c` | Yank / delete / change selection | nvim |
+| `gc` | Toggle comment | nvim |
+
 ### Claude Code
 
 | Key | Action | Source |
 |---|---|---|
 | `<leader>as` | Send selection as `@file#Lx-y` | custom `plugins/claude.lua` |
 
+### Git
+
+| Key | Action | Source |
+|---|---|---|
+| `<leader>gh` | History of selected lines (codediff) | custom `plugins/git.lua` |
+| `ih` | Select git hunk (file buffers) | custom `plugins/git.lua` (gitsigns) |
+
+## Operator-pending mode
+
+| Key | Action | Source |
+|---|---|---|
+| `ih` | Git hunk text object, e.g. `yih`, `dih` (file buffers) | custom `plugins/git.lua` (gitsigns) |
+
 ## Insert mode
+
+### Editing
+
+| Key | Action | Source |
+|---|---|---|
+| `Ctrl+o` | Run one Normal command, then back to Insert | nvim |
+| `Ctrl+r {reg}` | Insert register, e.g. `Ctrl+r +` clipboard, `Ctrl+r 0` last yank | nvim |
+| `Ctrl+w` / `Ctrl+u` | Delete word / to line start before cursor | nvim |
+| `Ctrl+t` / `Ctrl+d` | Indent / unindent line | nvim |
 
 ### Completion (blink.cmp `default` preset, `plugins/completion.lua`)
 
@@ -155,6 +346,11 @@ Leader: `<Space>`. Local leader: `\`.
 
 ## Command-line mode
 
-| Command | Action | Source |
+| Key / command | Action | Source |
 |---|---|---|
+| `Ctrl+r Ctrl+w` | Insert word under cursor, e.g. into `:%s/` | nvim |
+| `Up` / `Down` | History matching typed prefix | nvim |
+| `Tab` | Complete command, path, option | nvim |
+| `q:` | Command history window, editable (from Normal) | nvim |
+| `@:` | Repeat last command (from Normal) | nvim |
 | `:claude [args]` | Expands to `:ClaudeCode [args]` (only as the whole command) | custom `plugins/claude.lua` |
