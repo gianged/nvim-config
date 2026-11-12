@@ -131,6 +131,16 @@ local function clang_style_args(_, ctx)
     return #found == 0 and { CLANG_FALLBACK_STYLE } or {}
 end
 
+local function format_file()
+    local buf = vim.api.nvim_get_current_buf()
+    organize_imports(buf)
+    require("conform").format({ bufnr = buf })
+end
+
+local function format_selection()
+    require("conform").format()
+end
+
 local function toggle_format_on_save()
     vim.g.disable_autoformat = not vim.g.disable_autoformat
     vim.notify("Format on save " .. (vim.g.disable_autoformat and "off" or "on"))
@@ -175,6 +185,10 @@ return {
             end,
         })
 
-        vim.keymap.set("n", "<leader>uf", toggle_format_on_save, { desc = "Toggle format on save" })
+        vim.keymap.set("n", "<leader>ff", format_file, { desc = "Format file" })
+        vim.keymap.set("n", "<M-f>", format_file, { desc = "Format file" })
+        vim.keymap.set("x", "<leader>ff", format_selection, { desc = "Format selection" })
+        vim.keymap.set("x", "<M-f>", format_selection, { desc = "Format selection" })
+        vim.keymap.set("n", "<leader>ft", toggle_format_on_save, { desc = "Toggle format on save" })
     end,
 }

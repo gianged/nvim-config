@@ -54,7 +54,7 @@ return {
         vim.keymap.set("n", "<leader>q", vim.diagnostic.setqflist, { desc = "Diagnostics to quickfix" })
         vim.keymap.set("n", "<leader>wp", peek.promote, { desc = "Pin peek window into origin" })
         vim.keymap.set("n", "<C-p>", peek.promote, { desc = "Pin peek window into origin" })
-        vim.keymap.set("n", "<M-]>", peek.back, { desc = "Previous peek location" })
+        vim.keymap.set("n", "<M-[>", peek.back, { desc = "Previous peek location" })
 
         vim.api.nvim_create_autocmd("LspAttach", {
             group = vim.api.nvim_create_augroup("config_lsp", { clear = true }),
@@ -88,6 +88,12 @@ return {
                 vim.keymap.set(
                     "n",
                     "grr",
+                    references_without_imports,
+                    { buffer = buf, desc = "References without imports" }
+                )
+                vim.keymap.set(
+                    "n",
+                    "<M-]>",
                     references_without_imports,
                     { buffer = buf, desc = "References without imports" }
                 )

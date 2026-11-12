@@ -13,35 +13,35 @@ return {
     },
     keys = {
         {
-            "<leader>ff",
+            "<leader>pf",
             function()
                 require("snacks").picker.files()
             end,
             desc = "Find files",
         },
         {
-            "<M-f>",
+            "<M-t>",
             function()
                 require("snacks").picker.files()
             end,
             desc = "Find files",
         },
         {
-            "<leader>fg",
+            "<leader>pg",
             function()
                 require("snacks").picker.grep()
             end,
             desc = "Grep project",
         },
         {
-            "<leader>fb",
+            "<leader>pb",
             function()
                 require("snacks").picker.buffers()
             end,
             desc = "Buffers",
         },
         {
-            "<leader>fr",
+            "<leader>pr",
             function()
                 require("snacks").picker.resume()
             end,
